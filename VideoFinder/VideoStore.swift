@@ -11,6 +11,7 @@ import UIKit
 class VideoStore: NSObject {
 
     var videoArray  = [Video]()
+    var videoDetailsDict = [String:String]()
     let myNetworkmanager = NetworkDataManager.sharedNetworkmanager
     let myUtilities = Utilities.sharedUtility
     
@@ -80,7 +81,7 @@ class VideoStore: NSObject {
             myNetworkmanager.fetchDataWithUrl(webUrl!) { (success, fetchedData) -> Void in
                 if let data = fetchedData as? Dictionary<String,String>{
                     print(data)
-
+                    self.videoDetailsDict = data
                     completion(success: true)
                 }
                 

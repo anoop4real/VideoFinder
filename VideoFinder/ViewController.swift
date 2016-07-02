@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let videoStore = VideoStore()
-    
+    var currentVideoId:String!
     
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var videoCollectionView:UICollectionView!
@@ -87,8 +87,10 @@ class ViewController: UIViewController {
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-//        let video = self.videoStore.videoArray[indexPath.row]
-//        // API to fetch details of video
+         let video = self.videoStore.videoArray[indexPath.row]
+         self.currentVideoId = video.imdbId
+         self.performSegueWithIdentifier("showDetails", sender: self)
+        // API to fetch details of video
 //        self.videoStore.searchVideoBy(video.imdbId, includeRottenTomatoRatings: true) { (success) -> Void in
 //            
 //        }
@@ -109,6 +111,11 @@ class ViewController: UIViewController {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 50.0)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationController = segue.destinationViewController as! VideoDetailsViewController
+        destinationController.videoId = self.currentVideoId
     }
 }
 
