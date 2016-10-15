@@ -14,77 +14,69 @@ class VideoStore: NSObject {
     var videoDetailsDict = [String:String]()
     let myNetworkmanager = NetworkDataManager.sharedNetworkmanager
     let myUtilities = Utilities.sharedUtility
-    
-    func searchMovieDataWithKeyWord(keyWord:String, year:String, completion:(success:Bool)->Void)
-    {
+
+    func searchMovieDataWithKeyWord(keyWord: String, year: String, completion:(success: Bool) -> Void) {
         var paramDict = [String:String]()
-        if(!keyWord.isEmpty )
-        {
-            
+        if(!keyWord.isEmpty ) {
+
             paramDict[kSearchParamKey] = keyWord
         }
-        if(!year.isEmpty)
-        {
+        if(!year.isEmpty) {
             paramDict[kYearParamKey] = year
         }
-        
+
         paramDict[kPlotParamKey]     = "full"
         paramDict[kResponseParamKey] = "json"
-        if(!paramDict.isEmpty)
-        {
-            
+        if(!paramDict.isEmpty) {
+
             let url = myUtilities.buildQueryString(fromDictionary: paramDict)
-            
+
             print(url)
             let webUrl = NSURL(string: url)
+            var size = CGRectMake(0, 0, 0, 0)
 
             myNetworkmanager.fetchDataWithUrl(webUrl!) { (success, fetchedData) -> Void in
-                if let data = fetchedData["Search"] as? Array<AnyObject>{
+                if let data = fetchedData["Search"] as? Array<AnyObject> {
                     print(data)
-                    for videoDict in data{
-                        let video = Video(videoData: videoDict as! Dictionary<String,String>)
+                    for videoDict in data {
+                        let video = Video(videoData: videoDict as! Dictionary<String, String>)
                         self.videoArray.append(video!)
                     }
                     completion(success: true)
                 }
-                
+
             }
         }
-        
+
     }
-    
-    func searchVideoBy(imdbId:String, includeRottenTomatoRatings:Bool, withCompletion completion:(success:Bool)->Void)
-    {
+
+    func searchVideoBy(imdbId: String, includeRottenTomatoRatings: Bool, withCompletion completion:(success: Bool) -> Void) {
         var paramDict = [String:String]()
-        if(!imdbId.isEmpty )
-        {
-            
+        if(!imdbId.isEmpty ) {
+
             paramDict[kImdbIDParamKey] = imdbId
         }
-        if(includeRottenTomatoRatings)
-        {
+        if(includeRottenTomatoRatings) {
             paramDict[kIncludeTomatoParamKey] = "true"
-        }else
-        {
+        } else {
             paramDict[kIncludeTomatoParamKey] = "false"
         }
         paramDict[kPlotParamKey]     = "full"
         paramDict[kResponseParamKey] = "json"
-        if(!paramDict.isEmpty)
-        {
-            
+        if(!paramDict.isEmpty) {
+
             let url = myUtilities.buildQueryString(fromDictionary: paramDict)
-            
+
             print(url)
             let webUrl = NSURL(string: url)
-            
+
             myNetworkmanager.fetchDataWithUrl(webUrl!) { (success, fetchedData) -> Void in
-                if let data = fetchedData as? Dictionary<String,String>{
+                if let data = fetchedData as? Dictionary<String, String> {
                     print(data)
                     self.videoDetailsDict = data
                     completion(success: true)
                 }
-                
+
             }
         }
     }
