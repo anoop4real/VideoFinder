@@ -11,10 +11,10 @@ import UIKit
 class Utilities: NSObject {
 
     static let sharedUtility = Utilities()
-    
+
     func buildQueryString(fromDictionary parameters: [String:String]) -> String {
-        var urlVars:[String] = []
-        
+        var urlVars: [String] = []
+
         for (key, value) in parameters {
             if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
                 urlVars.append(key + "=" + encodedValue)
