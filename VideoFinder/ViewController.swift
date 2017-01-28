@@ -29,29 +29,29 @@ class ViewController: UIViewController {
 
     //Mark: Searchbar Delegate
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar){
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar){
         
         self.isSearching = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar){
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar){
         
         self.isSearching = false
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar){
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         
         self.isSearching = false
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         self.isSearching = false
        // searchBar.resignFirstResponder()
         self.videoStore.searchMovieDataWithKeyWord(searchBar.text!, year: "") { (success) -> Void in
             if(success){
                 // Reload collectionview after fetch is complete
-                dispatch_async(dispatch_get_main_queue()){
+                DispatchQueue.main.async{
                     
                     self.videoCollectionView.reloadData()
                 }
@@ -59,24 +59,24 @@ class ViewController: UIViewController {
         }
     }
 
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String){
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         
     }
     
     // MARK: Collectionview delegates
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
+    func numberOfSectionsInCollectionView(_ collectionView: UICollectionView) -> Int
     {
         return 1
     }
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return self.videoStore.videoArray.count
     }
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell
     {
-        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier("VideoCollectionViewCell", forIndexPath: indexPath) as? VideoCollectionViewCell{
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCollectionViewCell", for: indexPath) as? VideoCollectionViewCell{
             
-            cell.configureCellWithData(self.videoStore.videoArray[indexPath.row])
+            cell.configureCellWithData(self.videoStore.videoArray[(indexPath as NSIndexPath).row])
             return cell
         }
         else
@@ -85,36 +85,36 @@ class ViewController: UIViewController {
         }
         
     }
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath)
     {
-         let video = self.videoStore.videoArray[indexPath.row]
+         let video = self.videoStore.videoArray[(indexPath as NSIndexPath).row]
          self.currentVideoId = video.imdbId
-         self.performSegueWithIdentifier("showDetails", sender: self)
+         self.performSegue(withIdentifier: "showDetails", sender: self)
         // API to fetch details of video
 //        self.videoStore.searchVideoBy(video.imdbId, includeRottenTomatoRatings: true) { (success) -> Void in
 //            
 //        }
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
-        return CGSizeMake(150, 240);
+        return CGSize(width: 150, height: 240);
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 5
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
             return UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 50.0)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationController = segue.destinationViewController as! VideoDetailsViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationController = segue.destination as! VideoDetailsViewController
         destinationController.videoId = self.currentVideoId
     }
 }

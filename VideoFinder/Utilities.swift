@@ -16,11 +16,11 @@ class Utilities: NSObject {
         var urlVars:[String] = []
         
         for (key, value) in parameters {
-            if let encodedValue = value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
                 urlVars.append(key + "=" + encodedValue)
             }
         }
-        let url = urlVars.isEmpty ? "" : "?" + urlVars.joinWithSeparator("&")
+        let url = urlVars.isEmpty ? "" : "?" + urlVars.joined(separator: "&")
         return kAppBaseURL+url
     }
 }

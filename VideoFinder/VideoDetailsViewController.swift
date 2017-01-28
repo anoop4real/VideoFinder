@@ -31,7 +31,7 @@ class VideoDetailsViewController: UIViewController {
         activityIndicatorView.startAnimating()
         activityIndicatorView.hidesWhenStopped = true
         self.videoStore.searchVideoBy(self.videoId, includeRottenTomatoRatings: true) { (success) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.detailTableView.reloadData()
                 self.activityIndicatorView.stopAnimating()
             })
@@ -40,21 +40,21 @@ class VideoDetailsViewController: UIViewController {
     }
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int {
 
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.videoStore.videoDetailsDict.count
     }
     
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("videoDetail", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "videoDetail", for: indexPath)
 
-        let key = Array(self.videoStore.videoDetailsDict.keys)[indexPath.row]
+        let key = Array(self.videoStore.videoDetailsDict.keys)[(indexPath as NSIndexPath).row]
         cell.textLabel?.text = key
         cell.detailTextLabel?.text = self.videoStore.videoDetailsDict[key]
     

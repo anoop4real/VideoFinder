@@ -13,7 +13,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImageView:UIImageView!
     @IBOutlet weak var titleLabel:UILabel!
     
-    func configureCellWithData(videoData:Video){
+    func configureCellWithData(_ videoData:Video){
         
         if let videoTitle = videoData.title{
             
@@ -28,7 +28,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
                     posterImageView.alpha = 1
                     return
                 }
-                let url = NSURL(string: posterPath)
+                let url = URL(string: posterPath)
                 
                 if let image = url?.cachedImage{
                     posterImageView.image = image
@@ -40,7 +40,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
                     
                     url?.fetchImage({ (image) -> Void in
                         self.posterImageView.image = image
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        UIView.animate(withDuration: 0.3, animations: { () -> Void in
                             self.posterImageView.alpha = 1
                         })
                     })

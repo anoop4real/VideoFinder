@@ -15,7 +15,7 @@ class VideoStore: NSObject {
     let myNetworkmanager = NetworkDataManager.sharedNetworkmanager
     let myUtilities = Utilities.sharedUtility
     
-    func searchMovieDataWithKeyWord(keyWord:String, year:String, completion:(success:Bool)->Void)
+    func searchMovieDataWithKeyWord(_ keyWord:String, year:String, completion:@escaping (_ success:Bool)->Void)
     {
         var paramDict = [String:String]()
         if(!keyWord.isEmpty )
@@ -36,16 +36,20 @@ class VideoStore: NSObject {
             let url = myUtilities.buildQueryString(fromDictionary: paramDict)
             
             print(url)
-            let webUrl = NSURL(string: url)
+            let webUrl = URL(string: url)
 
-            myNetworkmanager.fetchDataWithUrl(webUrl!) { (success, fetchedData) -> Void in
-                if let data = fetchedData["Search"] as? Array<AnyObject>{
-                    print(data)
-                    for videoDict in data{
-                        let video = Video(videoData: videoDict as! Dictionary<String,String>)
-                        self.videoArray.append(video!)
+            let urlRequest = URLRequest(url: webUrl!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 2.0)
+            myNetworkmanager.fetchDataWithUrlRequest(urlRequest) { (success, fetchedData) -> Void in
+                if let data = fetchedData as? [String:Any]{
+                    print(data["Search"])
+                    if let vidData = data["Search"] as? [Any]{
+                        for videoDict in vidData{
+                            let video = Video(videoData: videoDict as! Dictionary<String,String>)
+                            self.videoArray.append(video!)
+                        }
+                        completion(true)
                     }
-                    completion(success: true)
+
                 }
                 
             }
@@ -53,7 +57,7 @@ class VideoStore: NSObject {
         
     }
     
-    func searchVideoBy(imdbId:String, includeRottenTomatoRatings:Bool, withCompletion completion:(success:Bool)->Void)
+    func searchVideoBy(_ imdbId:String, includeRottenTomatoRatings:Bool, withCompletion completion:@escaping (_ success:Bool)->Void)
     {
         var paramDict = [String:String]()
         if(!imdbId.isEmpty )
@@ -76,13 +80,13 @@ class VideoStore: NSObject {
             let url = myUtilities.buildQueryString(fromDictionary: paramDict)
             
             print(url)
-            let webUrl = NSURL(string: url)
-            
-            myNetworkmanager.fetchDataWithUrl(webUrl!) { (success, fetchedData) -> Void in
+            let webUrl = URL(string: url)
+            let urlRequest = URLRequest(url: webUrl!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 2.0)
+            myNetworkmanager.fetchDataWithUrlRequest(urlRequest) { (success, fetchedData) -> Void in
                 if let data = fetchedData as? Dictionary<String,String>{
                     print(data)
                     self.videoDetailsDict = data
-                    completion(success: true)
+                    completion(true)
                 }
                 
             }

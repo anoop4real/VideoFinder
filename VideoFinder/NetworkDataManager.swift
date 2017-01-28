@@ -8,64 +8,60 @@
 
 import UIKit
 
-class NetworkDataManager: NSObject {
-
+class NetworkDataManager: NSObject, URLSessionTaskDelegate {
+    
     // Singleton instance
     static let sharedNetworkmanager = NetworkDataManager()
     
     // Save images in cache
-    static let sharedCache: NSCache = {
-        let cache = NSCache()
+    static let sharedCache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
         cache.name = "MyImageCache"
         cache.countLimit = 20 // Max 20 images in memory.
         cache.totalCostLimit = 10*1024*1024 // Max 10MB used.
         return cache
     }()
     // Create a session
-    let session:NSURLSession = {
+    let session: URLSession = {
         
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let config = URLSessionConfiguration.default
+        config.urlCache = nil
         
-        return NSURLSession(configuration: config)
+        return URLSession(configuration: config)
     }()
     
     // Method to fetch data from URL
-    func fetchDataWithUrl(url:NSURL, completion:(success:Bool,fetchedData:AnyObject)->Void) {
+    func fetchDataWithUrlRequest(_ urlRequest: URLRequest, completion:@escaping (_ success: Bool, _ fetchedData:Any) -> Void) {
         
-        
-        let urlRequest = NSMutableURLRequest(URL: url)
-        let task = session.dataTaskWithRequest(urlRequest) { (data, response, error) -> Void in
-            if error != nil{
-                print(error?.description)
-            }else
-            {
-                do
-                {
-                    let jsonObject:AnyObject = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                    completion(success: true, fetchedData: jsonObject)
-                }catch
-                {
+        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) -> Void in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                do {
+                    let jsonObject:Any = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    completion(true, jsonObject)
+                } catch {
                     print("Error")
                 }
             }
-        }
+        })
         task.resume()
         
     }
 }
-extension NSURL {
+extension URL {
     
-    typealias ImageCacheCompletion = UIImage -> Void
+    typealias ImageCacheCompletion = (UIImage) -> Void
     
     /// Retrieves a pre-cached image, or nil if it isn't cached.
     /// You should call this before calling fetchImage.
     var cachedImage: UIImage? {
-        return NetworkDataManager.sharedCache.objectForKey(
-            absoluteString) as? UIImage
+        return NetworkDataManager.sharedCache.object(
+            forKey: absoluteString as NSString)
     }
-    func isValidUrl()->Bool{
+    func isValidUrl() -> Bool {
         
-        if(self.scheme.hasPrefix("http") || self.scheme.hasPrefix("https")){
+        if(self.scheme!.hasPrefix("http") || (self.scheme?.hasPrefix("https"))!) {
             return true
         }
         return false
@@ -74,35 +70,34 @@ extension NSURL {
     /// Stores it in the cache if successful.
     /// Only calls completion on successful image download.
     /// Completion is called on the main thread.
-    func fetchImage(completion: ImageCacheCompletion) {
-        let task = NSURLSession.sharedSession().dataTaskWithURL(self) {
+    func fetchImage(_ completion: @escaping ImageCacheCompletion) {
+        let task = URLSession.shared.dataTask(with: self, completionHandler: {
             data, response, error in
             if error == nil {
                 if let  data = data,
-                    image = UIImage(data: data) {
-                        NetworkDataManager.sharedCache.setObject(
-                            image,
-                            forKey: self.absoluteString,
-                            cost: data.length)
-                        dispatch_async(dispatch_get_main_queue()) {
-                            completion(image)
-                        }
+                    let image = UIImage(data: data) {
+                    NetworkDataManager.sharedCache.setObject(
+                        image,
+                        forKey: self.absoluteString as NSString,
+                        cost: data.count)
+                    DispatchQueue.main.async {
+                        completion(image)
+                    }
                 }
             }
-        }
+        })
         task.resume()
     }
     
 }
 
-extension String{
+extension String {
     
-    func isValidForUrl()->Bool{
+    func isValidForUrl() -> Bool {
         
-        if(self.hasPrefix("http") || self.hasPrefix("https")){
+        if(self.hasPrefix("http") || self.hasPrefix("https")) {
             return true
         }
         return false
     }
 }
-
