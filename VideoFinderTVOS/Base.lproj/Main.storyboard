@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" userLabel="Search" customClass="ViewController" customModule="VideoFinderTVOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qQ5-4J-UzK">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="918" id="VFx-vb-EKI"/>
+                                    <constraint firstAttribute="width" constant="1844" id="hUu-EK-wxj"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oXr-0Q-VQ5">
+                                    <size key="itemSize" width="250" height="357"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCollectionViewCell" id="Lsf-2s-fCi" customClass="VideoCollectionViewCell" customModule="VideoFinderTVOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="357"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="357"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="CollectionImage" translatesAutoresizingMaskIntoConstraints="NO" id="irV-gb-YS5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="203" placeholderIntrinsicHeight="61" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ih-Wc-LJB">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="6Ih-Wc-LJB" secondAttribute="bottom" constant="8" id="Vab-QZ-DxE"/>
+                                            <constraint firstItem="6Ih-Wc-LJB" firstAttribute="top" secondItem="irV-gb-YS5" secondAttribute="bottom" constant="8" id="cgH-gv-3iq"/>
+                                            <constraint firstAttribute="trailing" secondItem="6Ih-Wc-LJB" secondAttribute="trailing" constant="23" id="f46-hj-X4u"/>
+                                            <constraint firstItem="irV-gb-YS5" firstAttribute="top" secondItem="Lsf-2s-fCi" secondAttribute="top" id="fNm-iJ-a8y"/>
+                                            <constraint firstItem="irV-gb-YS5" firstAttribute="leading" secondItem="Lsf-2s-fCi" secondAttribute="leading" constant="2" id="kZx-87-FgX"/>
+                                            <constraint firstItem="6Ih-Wc-LJB" firstAttribute="leading" secondItem="Lsf-2s-fCi" secondAttribute="leading" constant="24" id="sif-aQ-20m"/>
+                                            <constraint firstAttribute="trailing" secondItem="irV-gb-YS5" secondAttribute="trailing" constant="2" id="zji-OA-jGB"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="posterImageView" destination="irV-gb-YS5" id="gVM-SF-HoM"/>
+                                            <outlet property="titleLabel" destination="6Ih-Wc-LJB" id="VGU-C1-pWE"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="bKo-lU-i1a"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="71w-Na-kVG"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5e-Gd-bTb">
+                                <frame key="frameInset" minX="782" minY="20" width="195" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showSearchView" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="NB6-Ux-Fb9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qQ5-4J-UzK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="142" id="Hbm-Yk-vbW"/>
+                            <constraint firstItem="qQ5-4J-UzK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="36" id="ZWR-en-e5R"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="rDB-u4-hVX" userLabel="Search"/>
+                    <connections>
+                        <outlet property="videoCollectionView" destination="qQ5-4J-UzK" id="S5a-IT-Kzr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1269" y="146"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="CollectionImage" width="150" height="212"/>
+    </resources>
+</document>

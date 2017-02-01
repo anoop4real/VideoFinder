@@ -8,14 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchResultsUpdating {
 
     let videoStore = VideoStore()
     var currentVideoId: String!
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var videoCollectionView: UICollectionView!
-
+    
+    var searchController:UISearchController!
     var isSearching: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,20 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func showSearchView(){
+    
+    // Initialize and set up the search controller
+    searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = self
+        self.present(searchController, animated: true) { 
+            
+        }
 
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        searchWithText(text: searchController.searchBar.text!)
+    }
     //Mark: Searchbar Delegate
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -46,14 +60,20 @@ class ViewController: UIViewController {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
+        searchWithText(text: searchBar.text!)
+    }
+    func searchWithText( text: String){
         self.isSearching = false
-       // searchBar.resignFirstResponder()
-        self.videoStore.searchMovieDataWithKeyWord(searchBar.text!, year: "") { (success) -> Void in
+        // searchBar.resignFirstResponder()
+        self.videoStore.searchMovieDataWithKeyWord(text, year: "") { (success) -> Void in
             if(success) {
                 // Reload collectionview after fetch is complete
                 DispatchQueue.main.async {
-
+                    
                     self.videoCollectionView.reloadData()
+                    self.searchController.dismiss(animated: true, completion: {
+                        
+                    })
                 }
             }
         }

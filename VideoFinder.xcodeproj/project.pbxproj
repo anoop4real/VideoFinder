@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7628D9F91E3E0D0A00216AD1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7628D9F71E3E0D0A00216AD1 /* Main.storyboard */; };
+		7628D9FB1E3E0D0A00216AD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7628D9FA1E3E0D0A00216AD1 /* Assets.xcassets */; };
+		7628DA011E3E0D6E00216AD1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D3D281D1888BC00CAD91B /* AppDelegate.swift */; };
+		7628DA021E3E0D8A00216AD1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D3D2A1D1888BC00CAD91B /* ViewController.swift */; };
+		7628DA031E3E0DC700216AD1 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E0E7081D1B2FEF00A5F4EA /* Video.swift */; };
+		7628DA041E3E0DD500216AD1 /* VideoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E0E7051D1B2E9C00A5F4EA /* VideoStore.swift */; };
+		7628DA051E3E0DE400216AD1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762B6BB31D19DB17005EFB89 /* Utilities.swift */; };
+		7628DA061E3E0DE700216AD1 /* NetworkDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D3D3D1D188C0300CAD91B /* NetworkDataManager.swift */; };
+		7628DA071E3E0DEA00216AD1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768D3D3B1D1888FF00CAD91B /* Constants.swift */; };
+		7628DA081E3E0E2400216AD1 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659DEEA1D1EE66F005718B4 /* VideoCollectionViewCell.swift */; };
+		7628DA091E3E0E3500216AD1 /* VideoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762C47101D2864C40094EAB4 /* VideoDetailsViewController.swift */; };
 		762B6BB41D19DB17005EFB89 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762B6BB31D19DB17005EFB89 /* Utilities.swift */; };
 		762C47111D2864C40094EAB4 /* VideoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762C47101D2864C40094EAB4 /* VideoDetailsViewController.swift */; };
 		7659DEEB1D1EE66F005718B4 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7659DEEA1D1EE66F005718B4 /* VideoCollectionViewCell.swift */; };
@@ -22,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7628D9F11E3E0D0A00216AD1 /* VideoFinderTVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoFinderTVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7628D9F81E3E0D0A00216AD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7628D9FA1E3E0D0A00216AD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7628D9FC1E3E0D0A00216AD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		762B6BB31D19DB17005EFB89 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		762C47101D2864C40094EAB4 /* VideoDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDetailsViewController.swift; sourceTree = "<group>"; };
 		7659DEEA1D1EE66F005718B4 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -39,6 +54,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7628D9EE1E3E0D0A00216AD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		768D3D221D1888BC00CAD91B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -49,6 +71,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7628D9F21E3E0D0A00216AD1 /* VideoFinderTVOS */ = {
+			isa = PBXGroup;
+			children = (
+				7628D9F71E3E0D0A00216AD1 /* Main.storyboard */,
+				7628D9FA1E3E0D0A00216AD1 /* Assets.xcassets */,
+				7628D9FC1E3E0D0A00216AD1 /* Info.plist */,
+			);
+			path = VideoFinderTVOS;
+			sourceTree = "<group>";
+		};
 		762B6BB01D19DA66005EFB89 /* NetworkUtilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				768D3D271D1888BC00CAD91B /* VideoFinder */,
+				7628D9F21E3E0D0A00216AD1 /* VideoFinderTVOS */,
 				768D3D261D1888BC00CAD91B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				768D3D251D1888BC00CAD91B /* VideoFinder.app */,
+				7628D9F11E3E0D0A00216AD1 /* VideoFinderTVOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,6 +162,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7628D9F01E3E0D0A00216AD1 /* VideoFinderTVOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7628D9FF1E3E0D0A00216AD1 /* Build configuration list for PBXNativeTarget "VideoFinderTVOS" */;
+			buildPhases = (
+				7628D9ED1E3E0D0A00216AD1 /* Sources */,
+				7628D9EE1E3E0D0A00216AD1 /* Frameworks */,
+				7628D9EF1E3E0D0A00216AD1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoFinderTVOS;
+			productName = VideoFinderTVOS;
+			productReference = 7628D9F11E3E0D0A00216AD1 /* VideoFinderTVOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		768D3D241D1888BC00CAD91B /* VideoFinder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 768D3D371D1888BC00CAD91B /* Build configuration list for PBXNativeTarget "VideoFinder" */;
@@ -152,10 +203,15 @@
 		768D3D1D1D1888BC00CAD91B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = anoopm;
 				TargetAttributes = {
+					7628D9F01E3E0D0A00216AD1 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 6UT7M6DT43;
+						ProvisioningStyle = Automatic;
+					};
 					768D3D241D1888BC00CAD91B = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
@@ -176,11 +232,21 @@
 			projectRoot = "";
 			targets = (
 				768D3D241D1888BC00CAD91B /* VideoFinder */,
+				7628D9F01E3E0D0A00216AD1 /* VideoFinderTVOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7628D9EF1E3E0D0A00216AD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7628D9FB1E3E0D0A00216AD1 /* Assets.xcassets in Resources */,
+				7628D9F91E3E0D0A00216AD1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		768D3D231D1888BC00CAD91B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,6 +277,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7628D9ED1E3E0D0A00216AD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7628DA091E3E0E3500216AD1 /* VideoDetailsViewController.swift in Sources */,
+				7628DA021E3E0D8A00216AD1 /* ViewController.swift in Sources */,
+				7628DA031E3E0DC700216AD1 /* Video.swift in Sources */,
+				7628DA061E3E0DE700216AD1 /* NetworkDataManager.swift in Sources */,
+				7628DA011E3E0D6E00216AD1 /* AppDelegate.swift in Sources */,
+				7628DA071E3E0DEA00216AD1 /* Constants.swift in Sources */,
+				7628DA051E3E0DE400216AD1 /* Utilities.swift in Sources */,
+				7628DA081E3E0E2400216AD1 /* VideoCollectionViewCell.swift in Sources */,
+				7628DA041E3E0DD500216AD1 /* VideoStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		768D3D211D1888BC00CAD91B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +312,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		7628D9F71E3E0D0A00216AD1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7628D9F81E3E0D0A00216AD1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		768D3D2C1D1888BC00CAD91B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -249,6 +339,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7628D9FD1E3E0D0A00216AD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 6UT7M6DT43;
+				INFOPLIST_FILE = VideoFinderTVOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anoop.VideoFinderTVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		7628D9FE1E3E0D0A00216AD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 6UT7M6DT43;
+				INFOPLIST_FILE = VideoFinderTVOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.anoop.VideoFinderTVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		768D3D351D1888BC00CAD91B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -359,6 +493,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7628D9FF1E3E0D0A00216AD1 /* Build configuration list for PBXNativeTarget "VideoFinderTVOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7628D9FD1E3E0D0A00216AD1 /* Debug */,
+				7628D9FE1E3E0D0A00216AD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		768D3D201D1888BC00CAD91B /* Build configuration list for PBXProject "VideoFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
