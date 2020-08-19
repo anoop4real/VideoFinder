@@ -16,7 +16,7 @@ struct Video {
     var type: String! // Video type. Movie, episode etc
     var posterURL: String!
 
-    init?(videoData: Dictionary<String, String>) {
+    init?(videoData: [String: String]) {
 
         guard
             let title  = videoData["Title"],

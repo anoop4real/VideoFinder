@@ -31,14 +31,14 @@ class NetworkDataManager: NSObject, URLSessionTaskDelegate {
     }()
 
     // Method to fetch data from URL
-    func fetchDataWithUrlRequest(_ urlRequest: URLRequest, completion:@escaping (_ success: Bool, _ fetchedData:Any) -> Void) {
+    func fetchDataWithUrlRequest(_ urlRequest: URLRequest, completion:@escaping (_ success: Bool, _ fetchedData: Any) -> Void) {
 
-        let task = session.dataTask(with: urlRequest, completionHandler: { (data, response, error) -> Void in
+        let task = session.dataTask(with: urlRequest, completionHandler: { (data, _, error) -> Void in
             if error != nil {
                 print(error!.localizedDescription)
             } else {
                 do {
-                    let jsonObject:Any = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    let jsonObject: Any = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
                     completion(true, jsonObject)
                 } catch {
                     print("Error")
@@ -72,7 +72,7 @@ extension URL {
     /// Completion is called on the main thread.
     func fetchImage(_ completion: @escaping ImageCacheCompletion) {
         let task = URLSession.shared.dataTask(with: self, completionHandler: {
-            data, response, error in
+            data, _, error in
             if error == nil {
                 if let  data = data,
                     let image = UIImage(data: data) {
